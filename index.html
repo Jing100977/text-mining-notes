@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Text Mining 筆記整理</title>
+  <meta name="description" content="適合初學者的文字探勘（Text Mining）白話筆記：摘要、心智圖、與逐章節詳細說明。">
+  <style>
+    :root{
+      --primary:#1565C0; --accent:#00897B; --ink:#37474F; --muted:#546E7A; --bg:#F7FAFC; --card:#FFFFFF;
+      --border:#E0E0E0; --highlight:#FFF3E0;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family: "PingFang TC","Noto Sans TC","Microsoft JhengHei","Heiti TC",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.7}
+    a{color:var(--primary);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{max-width:980px;margin:0 auto;padding:24px}
+    header.hero{background:linear-gradient(135deg,#1E88E5, #26C6DA); color:white; padding:56px 24px 36px; margin-bottom:24px}
+    .hero h1{margin:0 0 8px;font-size:34px;letter-spacing:0.3px}
+    .hero p{margin:0;color:#E3F2FD}
+    nav.toc{position:sticky;top:0;background:rgba(255,255,255,0.9);backdrop-filter: blur(6px);
+      border-bottom:1px solid var(--border); z-index:10}
+    .toc .inner{max-width:980px;margin:0 auto;display:flex;gap:16px;align-items:center;padding:10px 24px;overflow:auto}
+    .chip{display:inline-block;padding:6px 10px;border-radius:999px;background:#E3F2FD;color:#0D47A1;font-size:13px;border:1px solid #BBDEFB;white-space:nowrap}
+    section.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;margin:16px 0;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+    h2{color:var(--primary);margin:4px 0 12px}
+    h3{color:var(--accent);margin:8px 0}
+    .callout{background:var(--highlight);border-left:6px solid #FFB74D;padding:12px;border-radius:8px;margin:12px 0}
+    .grid{display:grid;grid-template-columns:1fr;gap:12px}
+    @media(min-width:768px){.grid{grid-template-columns:1fr 1fr}}
+    pre{background:#FAFAFA;border:1px solid var(--border);padding:12px;border-radius:10px;white-space:pre-wrap}
+    ul{padding-left:18px}
+    .footer{color:var(--muted);font-size:13px;text-align:center;padding:28px 0}
+    .taglist{display:flex;flex-wrap:wrap;gap:8px}
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <h1>📘 Text Mining 筆記整理</h1>
+      <p>Lecture 1｜文字與社群數據分析（適合初學者）</p>
+    </div>
+  </header>
+
+  <nav class="toc">
+    <div class="inner">
+      <a class="chip" href="#summary">📌 摘要</a>
+      <a class="chip" href="#mindmap">🧠 心智圖</a>
+      <a class="chip" href="#details">📖 詳細白話筆記</a>
+      <a class="chip" href="#download">⬇️ 下載/匯出</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section id="summary" class="card">
+      <h2>📌 摘要</h2>
+      <p>本筆記以白話與圖解，說明文字探勘（Text Mining）的目的、核心技術與應用場景。</p>
+      <div class="grid">
+        <div class="card">
+          <h3>🎯 目的</h3>
+          <p>將雜亂文字 → 可分析的數字與知識</p>
+        </div>
+        <div class="card">
+          <h3>🛠️ 技術</h3>
+          <p>TF‑IDF、向量空間模型（VSM）、餘弦相似度</p>
+        </div>
+        <div class="card">
+          <h3>💼 應用</h3>
+          <p>搜尋排序、垃圾郵件/新聞/客訴分類、專利/判例比對、作者鑑識</p>
+        </div>
+        <div class="card">
+          <h3>⚠️ 挑戰</h3>
+          <p>詞彙關聯未被表達、高維度（需特徵選取/降維）</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="mindmap" class="card">
+      <h2>🧠 心智圖（文字版）</h2>
+      <pre>文字探勘 (Text Mining)
+│
+├─ 為什麼需要？
+│   ├─ 文字資料爆炸性成長（社群、新聞、評論）
+│   └─ 大多數都是「非結構化資料」，不易直接分析
+│
+├─ 相關領域
+│   ├─ 語言學 / 計算語言學
+│   ├─ 資訊檢索 (IR)
+│   ├─ 資訊擷取 (IE)
+│   └─ 知識探索 (Knowledge Discovery)
+│
+├─ 技術基礎
+│   ├─ 資訊檢索 → 搜尋符合需求的文件
+│   ├─ TF‑IDF → 找出文件的重要詞
+│   └─ 向量空間模型 (VSM) → 把文件轉成數字向量
+│
+├─ 實際應用
+│   ├─ 搜尋引擎排序 (Google)
+│   ├─ 自動分類（垃圾郵件 / 客訴 / 新聞）
+│   ├─ 相似性分析（專利比對 / 判例比對）
+│   └─ 作者身分鑑定（Rowling 案例）
+│
+└─ 限制與挑戰
+    ├─ 詞與詞之間其實有關聯（tornado ≈ hurricane）
+    └─ 維度太高 → 需降維 / 特徵選取</pre>
+      <div class="callout">想要圖像版心智圖（PNG/SVG）？我可以幫你額外輸出一張圖放在這裡。</div>
+    </section>
+
+    <section id="details" class="card">
+      <h2>📖 詳細白話筆記</h2>
+
+      <h3>第一部分：文字探勘的意義</h3>
+      <p>大多數現實世界的資料其實是「文字」。例如社群留言、客服紀錄、新聞與評論。文字探勘的目標：在不可能逐字閱讀的前提下，自動萃取出「誰在說什麼、怎麼說、情緒如何」。</p>
+
+      <h3>第二部分：跨學科基礎</h3>
+      <p>文字探勘結合：語言學（語法/語意）、計算語言學（NLP 工具）、資訊檢索（找到相關文件）、資訊擷取（抽取人名、地點、時間、情感）與知識探索（從資料中歸納模式）。</p>
+
+      <h3>第三部分：真實案例</h3>
+      <p>（1）新聞或社群自動標註關鍵實體與情感；（2）作者鑑識：透過詞頻、單詞長度、標點使用與片語習慣等特徵，可辨識筆名背後的作者（如羅琳案例）。</p>
+
+      <h3>第四部分：資訊檢索（IR）</h3>
+      <p>傳統布林檢索易出現「太多或太少」的結果；排序檢索（Ranked Retrieval）則依相關度高低排序回傳，更符合一般使用者需求。</p>
+
+      <h3>第五部分：TF‑IDF 權重</h3>
+      <p>TF 表示詞在文件內的出現次數，但影響並非線性，因此常用對數加權；IDF 則降低常見詞、提高稀有詞的重要性。兩者相乘的 TF‑IDF，能凸顯對該文件有鑑別力的詞。</p>
+
+      <h3>第六部分：向量空間模型（VSM）</h3>
+      <p>把文件轉為向量（每個詞是一個維度，值為 TF‑IDF 權重），以餘弦相似度衡量兩份文件的相似程度。此模型支援搜尋排序、分類、分群等任務。</p>
+
+      <h3>第七部分：限制與挑戰</h3>
+      <p>VSM 假設詞彼此獨立，但現實中詞常有語義關聯；此外字彙量龐大導致高維度與高計算成本。常見解法：特徵選取（只留代表性詞）與降維（如 LSI）。</p>
+
+      <h3>結語</h3>
+      <p>文字探勘的精神，是把自然語言轉成可計算的結構與數字，進而從海量文字找出可用的知識。</p>
+    </section>
+
+    <section id="download" class="card">
+      <h2>⬇️ 下載/匯出</h2>
+      <p>在 Mac 上：開啟此頁 → <b>檔案 ▸ 列印 ▸ 存成 PDF</b>，即可得到高品質 PDF（使用系統中文字體，不會亂碼）。</p>
+      <div class="taglist">
+        <span class="chip">PingFang TC</span>
+        <span class="chip">Noto Sans TC</span>
+        <span class="chip">Microsoft JhengHei</span>
+      </div>
+    </section>
+  </main>
+
+  <div class="footer">© 2025 Text Mining Notes · 建置：靜態網站（GitHub Pages / Netlify / Vercel）</div>
+</body>
+</html>
